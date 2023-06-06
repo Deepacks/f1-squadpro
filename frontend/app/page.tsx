@@ -1,3 +1,5 @@
 export default function Root() {
-  return <main></main>
+  const content = 'Hello world!'
+
+  return <main>{content}</main>
 }

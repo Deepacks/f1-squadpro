@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { useToggle, useWindowSize } from 'react-use'
 import {
   Bars3Icon,
@@ -10,7 +10,7 @@ import {
 
 import { IconButton, Navbar as MaterialNavbar } from '@material'
 
-export function Navbar() {
+export const Navbar = memo(() => {
   const { width } = useWindowSize()
 
   const [openNav, toggleOpenNav] = useToggle(false)
@@ -58,4 +58,4 @@ export function Navbar() {
       </Collapse> */}
     </MaterialNavbar>
   )
-}
+})

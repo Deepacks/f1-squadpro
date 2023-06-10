@@ -1,3 +1,4 @@
+import { FC, memo } from 'react'
 import {
   Button as MaterialButton,
   ButtonProps as MaterialButtonProps,
@@ -10,7 +11,7 @@ interface ButtonProps {
   children: React.ReactNode
 }
 
-export function Button(props: ButtonProps) {
+export const Button: FC<ButtonProps> = memo((props) => {
   const { className, ...buttonProps } = props
 
   return (
@@ -19,4 +20,4 @@ export function Button(props: ButtonProps) {
       {...buttonProps}
     />
   )
-}
+})

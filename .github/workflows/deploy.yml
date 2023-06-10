@@ -19,7 +19,7 @@ jobs:
         name: Extract version
         id: extract_version
         with:
-          path: ./backend/package.json
+          path: ./backend
 
       - uses: mr-smithers-excellent/docker-build-push@v6.2
         name: Build & Push backend docker image
@@ -44,7 +44,7 @@ jobs:
         name: Extract version
         id: extract_version
         with:
-          path: ./frontend/package.json
+          path: ./frontend
 
       - uses: mr-smithers-excellent/docker-build-push@v6.2
         name: Build & Push frontend docker image

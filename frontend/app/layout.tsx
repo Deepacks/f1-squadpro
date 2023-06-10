@@ -1,7 +1,5 @@
 import '../styles/globals.scss'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { RootProvider } from '@providers'
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <RootProvider>{children}</RootProvider>
     </html>
   )
 }

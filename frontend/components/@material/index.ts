@@ -1,3 +1,3 @@
 'use client'
 
-export {} from '@material-tailwind/react'
+export { ThemeProvider } from '@material-tailwind/react'

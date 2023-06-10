@@ -7,8 +7,9 @@ on:
 jobs:
   build-backend-image:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./backend
+    defaults:
+      run:
+        working-directory: ./backend
 
     steps:
       - uses: actions/checkout@v3.5.3
@@ -29,8 +30,9 @@ jobs:
 
   build-frontend-image:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./frontend
+    defaults:
+      run:
+        working-directory: ./frontend
 
     steps:
       - uses: actions/checkout@v3.5.3

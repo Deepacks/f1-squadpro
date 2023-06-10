@@ -1,5 +1,3 @@
-[![GitHub Super-Linter](https://github.com/deepacks/f1-squadpro/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
-
 # F1 SquadPro
 
 A web app to manage a seasonal championship with your friends on EA's F1 games.

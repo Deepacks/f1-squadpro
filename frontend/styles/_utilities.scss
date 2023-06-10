@@ -1,0 +1,11 @@
+@layer utilities {
+  .mark {
+    border: 2px solid #f0f;
+  }
+
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

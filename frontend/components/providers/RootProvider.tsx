@@ -1,12 +1,14 @@
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from '@material'
+
+import { Navbar } from '@layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export function RootProvider({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider>
-      <body className={inter.className}>{children}</body>
-    </ThemeProvider>
+    <body className={inter.className}>
+      <Navbar />
+      <main>{children}</main>
+    </body>
   )
 }

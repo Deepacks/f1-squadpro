@@ -18,6 +18,8 @@ jobs:
       - uses: Saionaro/extract-package-version@v1.2.1
         name: Extract version
         id: extract_version
+        with:
+          path: ./backend/package.json
 
       - uses: mr-smithers-excellent/docker-build-push@v6.2
         name: Build & Push backend docker image
@@ -41,6 +43,8 @@ jobs:
       - uses: Saionaro/extract-package-version@v1.2.1
         name: Extract version
         id: extract_version
+        with:
+          path: ./frontend/package.json
 
       - uses: mr-smithers-excellent/docker-build-push@v6.2
         name: Build & Push frontend docker image

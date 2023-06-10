@@ -27,6 +27,7 @@ jobs:
           image: deepacks/f1squadpro-backend
           tags: ${{ steps.extract_version.outputs.version }}, latest
           registry: docker.io
+          dockerfile: ./backend/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
@@ -52,6 +53,7 @@ jobs:
           image: deepacks/f1squadpro-frontend
           tags: ${{ steps.extract_version.outputs.version }}, latest
           registry: docker.io
+          dockerfile: ./frontend/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 #   update-backend-service:

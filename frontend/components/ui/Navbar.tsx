@@ -12,6 +12,7 @@ import {
 
 import { Button, IconButton, Navbar as MaterialNavbar } from '@material'
 import { Menu, MenuItem } from './Menu'
+import { Logo } from './Logo'
 
 enum UserMenuItems {
   LOGOUT = 'logout',
@@ -59,7 +60,7 @@ export const Navbar = memo(() => {
   return (
     <MaterialNavbar className="h-[66px] max-w-full flex items-center absolute inset-0 z-10 rounded-none">
       <div className="w-full flex items-center justify-between text-[color:var(--text-color)]">
-        <h1>F1 SquadPro</h1>
+        <Logo />
 
         <div className="hidden lg:inline-block">{navList}</div>
 

@@ -1,4 +1,4 @@
-export default function ChampionshipPage() {
+export default function DriversPage() {
   return (
     <div className="p-4 flex flex-col items-center">
       <div className="w-80 h-80 bg-red-100" />

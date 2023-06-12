@@ -1,4 +1,4 @@
-export default function ResultsPage() {
+export default function TeamsPage() {
   return (
     <div className="p-4 flex flex-col items-center">
       <div className="w-80 h-80 bg-gray-100" />

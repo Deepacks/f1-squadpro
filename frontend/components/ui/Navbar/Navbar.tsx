@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useToggle, useWindowSize } from 'react-use'
 
@@ -14,8 +14,14 @@ export function Navbar() {
   const { width } = useWindowSize()
 
   const [openNav, toggleOpenNav] = useToggle(false)
+
+  const handleCloseNav = useCallback(
+    () => toggleOpenNav(false),
+    [toggleOpenNav],
+  )
+
   useEffect(() => {
-    if (openNav && width >= 960) toggleOpenNav(false)
+    if (openNav && width >= 960) handleCloseNav()
   }, [width])
 
   return (
@@ -44,7 +50,7 @@ export function Navbar() {
         </IconButton>
       </div>
 
-      <NavbarMobileNav isOpen={openNav} />
+      <NavbarMobileNav isOpen={openNav} onClose={handleCloseNav} />
     </MaterialNavbar>
   )
 }

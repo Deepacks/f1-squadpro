@@ -3,7 +3,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
-export const useTabNavigation: () => [string, (page: string) => void] = () => {
+export const useTabNavigation: (
+  onClose?: () => void,
+) => [string, (page: string) => void] = (onClose) => {
   const router = useRouter()
   const pathname = usePathname()
 
@@ -19,6 +21,7 @@ export const useTabNavigation: () => [string, (page: string) => void] = () => {
     (page: string) => {
       router.push(`/${page}`)
       setActiveTab(page)
+      if (onClose) setTimeout(onClose, 200)
     },
     [router],
   )

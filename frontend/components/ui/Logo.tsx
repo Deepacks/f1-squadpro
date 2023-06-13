@@ -5,6 +5,7 @@ export const Logo: FC = memo(() => {
   return (
     <div className="relative bottom-[2px]">
       <Image
+        priority
         src="/f1-squadpro/images/f1logo.png"
         alt="f1 logo"
         height={60}

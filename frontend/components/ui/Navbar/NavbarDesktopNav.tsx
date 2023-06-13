@@ -14,8 +14,7 @@ export const NavbarDesktopNav: FC = memo(() => {
       <TabsHeader
         className="p-0 rounded-none bg-transparent gap-6"
         indicatorProps={{
-          className:
-            'bg-transparent border-b-2 border-[color:var(--accent-color)] shadow-none rounded-none',
+          className: 'hidden',
         }}
       >
         {NAV_DATA.map(({ label, value }) => (
@@ -24,7 +23,9 @@ export const NavbarDesktopNav: FC = memo(() => {
             value={value}
             onClick={() => handleNavigationChange(value)}
             className={
-              activeTab === value ? 'text-[color:var(--accent-color)]' : ''
+              activeTab === value
+                ? 'text-[color:var(--accent-color)] border-b-2 border-[color:var(--accent-color)]'
+                : 'text-black'
             }
           >
             <p className="font-semibold">{label}</p>

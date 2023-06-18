@@ -26,7 +26,7 @@ export function Navbar() {
 
   return (
     <MaterialNavbar className="p-0 min-h-[66px] h-max max-w-full absolute top-0 inset-0 z-10 rounded-none text-[color:var(--text-color)]">
-      <div className="px-5 lg:pr-0 w-full h-full flex items-center justify-between relative">
+      <div className="px-5 lg:pr-0 w-full h-[64px] flex items-center justify-between relative">
         <Logo />
 
         <div className="m-auto w-max hidden lg:flex absolute top-0 right-0 bottom-0 left-0 justify-center items-center">

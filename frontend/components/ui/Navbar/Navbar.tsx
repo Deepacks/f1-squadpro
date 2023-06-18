@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useToggle, useWindowSize } from 'react-use'
 
@@ -10,7 +10,11 @@ import { NavbarDesktopNav } from './NavbarDesktopNav'
 import { NavbarMobileNav } from './NavbarMobileNav'
 import { Logo } from '../Logo'
 
-export function Navbar() {
+interface NavbarProps {
+  appPage?: boolean
+}
+
+export function Navbar({ appPage }: NavbarProps) {
   const { width } = useWindowSize()
 
   const [openNav, toggleOpenNav] = useToggle(false)
@@ -29,28 +33,32 @@ export function Navbar() {
       <div className="px-5 lg:pr-0 w-full h-[64px] flex items-center justify-between relative">
         <Logo />
 
-        <div className="m-auto w-max hidden lg:flex absolute top-0 right-0 bottom-0 left-0 justify-center items-center">
-          <NavbarDesktopNav />
-        </div>
+        {appPage && (
+          <>
+            <div className="m-auto w-max hidden lg:flex absolute top-0 right-0 bottom-0 left-0 justify-center items-center">
+              <NavbarDesktopNav />
+            </div>
 
-        <NavbarUserMenuDesktop />
+            <NavbarUserMenuDesktop />
 
-        <IconButton
-          aria-label="toggle mobile navigation"
-          variant="text"
-          className="text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden relative z-20"
-          ripple={false}
-          onClick={toggleOpenNav}
-        >
-          {openNav ? (
-            <XMarkIcon className="h-7 w-7" />
-          ) : (
-            <Bars3Icon className="h-7 w-7" />
-          )}
-        </IconButton>
+            <IconButton
+              aria-label="toggle mobile navigation"
+              variant="text"
+              className="text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden relative z-20"
+              ripple={false}
+              onClick={toggleOpenNav}
+            >
+              {openNav ? (
+                <XMarkIcon className="h-7 w-7" />
+              ) : (
+                <Bars3Icon className="h-7 w-7" />
+              )}
+            </IconButton>
+          </>
+        )}
       </div>
 
-      <NavbarMobileNav isOpen={openNav} onClose={handleCloseNav} />
+      {appPage && <NavbarMobileNav isOpen={openNav} onClose={handleCloseNav} />}
     </MaterialNavbar>
   )
 }

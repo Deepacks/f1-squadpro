@@ -1,3 +1,5 @@
+import { LoginPageTemplate } from '@templates'
+
 export default function LoginPage() {
-  return <div>login</div>
+  return <LoginPageTemplate />
 }

@@ -4,7 +4,7 @@ import { genSalt, hash as genHash, compare } from 'bcryptjs'
 
 import { UserService } from 'src/core/user/user.service'
 import { RequestUser } from './types/auth.types'
-import { AuthDto } from './dto/auth-dto.type'
+import { AuthDto, AuthRegisterDto } from './dto/auth-dto.type'
 import { RevokedTokenService } from 'src/core/revokedToken/revokedToken.service'
 import { TokenDto } from 'src/core/revokedToken/dto/token.dto'
 
@@ -36,10 +36,10 @@ export class AuthService {
     return { userId }
   }
 
-  async register(authDto: AuthDto): Promise<string> {
-    const { email, password } = authDto
+  async register(authDto: AuthRegisterDto): Promise<string> {
+    const { password, ...userData } = authDto
 
-    const existingUser = await this.userService.findByEmail(email)
+    const existingUser = await this.userService.findByEmail(userData.email)
     if (existingUser) {
       throw new HttpException('Already exists', HttpStatus.FORBIDDEN)
     }
@@ -47,7 +47,7 @@ export class AuthService {
     const salt = await genSalt(10)
     const hash = await genHash(password, salt)
     const user = await this.userService.create({
-      email,
+      ...userData,
       hash,
     })
 

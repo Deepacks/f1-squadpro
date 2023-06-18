@@ -12,7 +12,7 @@ import {
 import { AuthService } from './auth.service'
 import { isDev } from 'src/helpers/isDev.helper'
 import { CookieOptions, Request, Response } from 'express'
-import { AuthDto } from './dto/auth-dto.type'
+import { AuthDto, AuthRegisterDto } from './dto/auth-dto.type'
 import { JwtAuthGuard } from './jwt-auth.guard'
 
 const COOKIE_OPTIONS: CookieOptions = {
@@ -28,7 +28,7 @@ export class AuthController {
   @Post('register')
   async register(
     @Res({ passthrough: true }) res: Response,
-    @Body() authDto: AuthDto,
+    @Body() authDto: AuthRegisterDto,
   ) {
     const jwt = await this.authService.register(authDto)
     res.cookie('Bearer', jwt, {

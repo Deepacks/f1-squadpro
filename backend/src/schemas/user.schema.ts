@@ -10,6 +10,12 @@ export class User {
 
   @Prop({ required: true })
   hash: string
+
+  @Prop({ required: true })
+  firstName: string
+
+  @Prop({ required: true })
+  lastName: string
 }
 
 export type UserDocument = User & Document

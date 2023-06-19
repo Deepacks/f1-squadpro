@@ -9,11 +9,13 @@ import { getEnvVar } from './helpers/getEnvVar.helper'
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(
-      `mongodb://${getEnvVar('MONGO_HOST')}:27017/${getEnvVar('MONGO_DB')}`,
+      `mongodb://${getEnvVar('F1_MONGO_HOST')}:27017/${getEnvVar(
+        'F1_MONGO_DB',
+      )}`,
       {
-        authSource: getEnvVar('MONGO_DB'),
-        user: getEnvVar('MONGO_USER'),
-        pass: getEnvVar('MONGO_PASS'),
+        authSource: getEnvVar('F1_MONGO_DB'),
+        user: getEnvVar('F1_MONGO_USER'),
+        pass: getEnvVar('F1_MONGO_PASS'),
       },
     ),
 

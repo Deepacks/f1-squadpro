@@ -10,9 +10,9 @@ async function bootstrap() {
   app.setGlobalPrefix('/f1-squadpro/api')
   app.enableCors({
     credentials: true,
-    origin: getEnvVar('JAVASCRIPT_ORIGIN_URL'),
+    origin: getEnvVar('F1_JAVASCRIPT_ORIGIN_URL'),
   })
-  app.use(cookieParser(getEnvVar('COOKIE_SECRET')))
+  app.use(cookieParser(getEnvVar('F1_COOKIE_SECRET')))
 
   await app.listen(8081)
 }

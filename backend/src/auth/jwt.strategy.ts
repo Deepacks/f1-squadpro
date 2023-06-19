@@ -13,7 +13,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([JwtStrategy.extractJwt]),
-      secretOrKey: getEnvVar('JWT_SECRET'),
+      secretOrKey: getEnvVar('F1_JWT_SECRET'),
     })
   }
 

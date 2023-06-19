@@ -21,9 +21,9 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@material": ["./components/@material/index.ts"],
       "@forms": ["./components/forms/index.ts"],
       "@layouts": ["./components/layouts/index.ts"],
+      "@material": ["./components/@material/index.ts"],
       "@providers": ["./components/providers/index.ts"],
       "@templates": ["./templates/index.ts"],
       "@ui": ["./components/ui/index.ts"]

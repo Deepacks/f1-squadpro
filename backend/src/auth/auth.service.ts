@@ -62,7 +62,8 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED)
     }
 
-    const areCredentialsValid = compare(password, user.hash)
+    const areCredentialsValid = await compare(password, user.hash)
+
     if (!areCredentialsValid) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED)
     }

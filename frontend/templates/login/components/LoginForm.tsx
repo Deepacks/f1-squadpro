@@ -62,6 +62,7 @@ export const LoginForm: FC = memo(() => {
             required
             size="lg"
             label="Email"
+            autoComplete="email"
             value={email}
             onChange={({ target: { value } }) => setEmail(value)}
           />
@@ -73,6 +74,7 @@ export const LoginForm: FC = memo(() => {
               type="password"
               size="lg"
               label="Password"
+              autoComplete="current-password"
               value={password}
               onChange={({ target: { value } }) => setPassword(value)}
             />

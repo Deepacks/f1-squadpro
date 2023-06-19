@@ -25,6 +25,7 @@
       "@layouts": ["./components/layouts/index.ts"],
       "@material": ["./components/@material/index.ts"],
       "@providers": ["./components/providers/index.ts"],
+      "@store": ["./redux/hooks.ts"],
       "@templates": ["./templates/index.ts"],
       "@ui": ["./components/ui/index.ts"]
     }

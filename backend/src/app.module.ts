@@ -8,16 +8,29 @@ import { getEnvVar } from './helpers/getEnvVar.helper'
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot(
-      `mongodb://${getEnvVar('F1_MONGO_HOST')}:27017/${getEnvVar(
-        'F1_MONGO_DB',
-      )}`,
-      {
-        authSource: getEnvVar('F1_MONGO_DB'),
-        user: getEnvVar('F1_MONGO_USER'),
-        pass: getEnvVar('F1_MONGO_PASS'),
+    MongooseModule.forRootAsync({
+      useFactory: () => {
+        console.log(
+          `mongodb://${getEnvVar('F1_MONGO_HOST')}:27017/${getEnvVar(
+            'F1_MONGO_DB',
+          )}`,
+        )
+        console.log(
+          getEnvVar('F1_MONGO_DB'),
+          getEnvVar('F1_MONGO_USER'),
+          getEnvVar('F1_MONGO_PASS'),
+        )
+
+        return {
+          uri: `mongodb://${getEnvVar('F1_MONGO_HOST')}:27017/${getEnvVar(
+            'F1_MONGO_DB',
+          )}`,
+          authSource: getEnvVar('F1_MONGO_DB'),
+          user: getEnvVar('F1_MONGO_USER'),
+          pass: getEnvVar('F1_MONGO_PASS'),
+        }
       },
-    ),
+    }),
 
     // --- auth ---
     AuthModule,

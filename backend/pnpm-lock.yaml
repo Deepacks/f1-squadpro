@@ -35,6 +35,9 @@ dependencies:
   docker-secret:
     specifier: ^2.0.6
     version: 2.0.6(@babel/core@7.22.5)
+  mongoose:
+    specifier: ^7.3.0
+    version: 7.3.0
   passport-jwt:
     specifier: ^4.0.1
     version: 4.0.1

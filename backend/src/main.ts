@@ -7,6 +7,15 @@ import { getEnvVar } from './helpers/getEnvVar.helper'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
+  console.log(
+    `mongodb://${getEnvVar('F1_MONGO_HOST')}:27017/${getEnvVar('F1_MONGO_DB')}`,
+  )
+  console.log(
+    getEnvVar('F1_MONGO_DB'),
+    getEnvVar('F1_MONGO_USER'),
+    getEnvVar('F1_MONGO_PASS'),
+  )
+
   app.setGlobalPrefix('/f1-squadpro/api')
   app.enableCors({
     credentials: true,

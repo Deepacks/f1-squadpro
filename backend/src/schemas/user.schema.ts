@@ -16,6 +16,9 @@ export class User {
 
   @Prop({ required: true })
   lastName: string
+
+  @Prop({ default: false })
+  isF1Driver: string
 }
 
 export type UserDocument = User & Document

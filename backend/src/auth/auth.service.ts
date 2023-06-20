@@ -58,7 +58,7 @@ export class AuthService {
     const { email, password } = authDto
 
     const user = await this.userService.findByEmail(email)
-    if (!user) {
+    if (!user || user.isF1Driver) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED)
     }
 

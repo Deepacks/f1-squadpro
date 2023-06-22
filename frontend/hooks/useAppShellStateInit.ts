@@ -1,12 +1,19 @@
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useAppDispatch } from '@/redux/hooks'
 import { UserState, fetchSession } from '@/redux/slices/userSlice'
 import { fetchChampionship } from '@/redux/slices/championshipSlice'
 
-export const useAppShellStateInit = () => {
+export const useAppShellStateInit: () => [boolean, () => void] = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
+
+  const [showChampionshipDialog, setShowChampionshipDialog] = useState(false)
+
+  const handleDialogClose = useCallback(
+    () => setShowChampionshipDialog(false),
+    [],
+  )
 
   useEffect(() => {
     dispatch(
@@ -14,9 +21,13 @@ export const useAppShellStateInit = () => {
         onReject: () => router.replace('/login'),
       }),
     ).then((action) => {
-      if (!(action.payload as UserState).hasChampionship) return
-
-      dispatch(fetchChampionship())
+      if (!(action.payload as UserState).hasChampionship) {
+        setShowChampionshipDialog(true)
+      } else {
+        dispatch(fetchChampionship())
+      }
     })
   }, [])
+
+  return [showChampionshipDialog, handleDialogClose]
 }

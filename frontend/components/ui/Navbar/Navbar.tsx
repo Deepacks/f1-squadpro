@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo } from 'react'
+import { FC, memo, useCallback, useEffect } from 'react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useToggle, useWindowSize } from 'react-use'
 
@@ -14,7 +14,7 @@ interface NavbarProps {
   appPage?: boolean
 }
 
-export function Navbar({ appPage }: NavbarProps) {
+export const Navbar: FC<NavbarProps> = memo(({ appPage }) => {
   const { width } = useWindowSize()
 
   const [openNav, toggleOpenNav] = useToggle(false)
@@ -61,4 +61,4 @@ export function Navbar({ appPage }: NavbarProps) {
       {appPage && <NavbarMobileNav isOpen={openNav} onClose={handleCloseNav} />}
     </MaterialNavbar>
   )
-}
+})

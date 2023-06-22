@@ -31,6 +31,7 @@ export class UserService {
     return this.userModel.findById(id, {
       _id: false,
       hash: false,
+      isF1Driver: false,
       __v: false,
     })
   }

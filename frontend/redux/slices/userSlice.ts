@@ -5,12 +5,14 @@ export interface UserState {
   email: string
   firstName: string
   lastName: string
+  hasChampionship: boolean | undefined
 }
 
 const initialState: UserState = {
   email: '',
   firstName: '',
   lastName: '',
+  hasChampionship: undefined,
 }
 
 const userSlice = createSlice({
@@ -20,8 +22,9 @@ const userSlice = createSlice({
     updateUser: (_, action: PayloadAction<UserState>) => action.payload,
   },
   extraReducers(builder) {
-    builder.addCase(fetchSession.fulfilled, (_, { payload }) => payload),
-      builder.addCase(fetchSession.rejected, (state, { meta }) => {
+    builder
+      .addCase(fetchSession.fulfilled, (_, { payload }) => payload!)
+      .addCase(fetchSession.rejected, (state, { meta }) => {
         if (meta.arg?.onReject) meta.arg.onReject()
         return state
       })

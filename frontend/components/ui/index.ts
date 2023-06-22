@@ -1,4 +1,5 @@
 export { Card } from './Card'
+export { Dialog } from './Dialog'
 export { Logo } from './Logo'
 export { Menu, type MenuItem } from './Menu'
 export { Navbar } from './Navbar'

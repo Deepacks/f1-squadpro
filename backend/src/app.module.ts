@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
 
-import { AuthModule } from './auth/auth.module'
 import { getEnvVar } from './helpers/getEnvVar.helper'
+import { AuthModule } from './auth/auth.module'
+import { ChampionshipModule } from './core/championship/championship.module'
 
 @Module({
   imports: [
@@ -20,6 +21,9 @@ import { getEnvVar } from './helpers/getEnvVar.helper'
     ),
     // --- auth ---
     AuthModule,
+
+    // --- core ---
+    ChampionshipModule,
   ],
 })
 export class AppModule {}

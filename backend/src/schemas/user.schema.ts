@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { Document, ObjectId } from 'mongoose'
+import { Document, ObjectId, SchemaTypes } from 'mongoose'
+
+import { Championship } from './championship.schema'
 
 @Schema()
 export class User {
@@ -18,7 +20,10 @@ export class User {
   lastName: string
 
   @Prop({ default: false })
-  isF1Driver: string
+  isF1Driver: boolean
+
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'Championship', default: null })
+  championship: Championship | null
 }
 
 export type UserDocument = User & Document

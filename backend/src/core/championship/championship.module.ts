@@ -6,6 +6,7 @@ import {
   ChampionshipSchema,
 } from 'src/schemas/championship.schema'
 import { TeamModule } from '../team/team.module'
+import { UserModule } from '../user/user.module'
 import { ChampionshipController } from './championship.controller'
 import { ChampionshipService } from './championship.service'
 
@@ -15,6 +16,7 @@ import { ChampionshipService } from './championship.service'
       { name: Championship.name, schema: ChampionshipSchema },
     ]),
     TeamModule,
+    UserModule,
   ],
   controllers: [ChampionshipController],
   providers: [ChampionshipService],

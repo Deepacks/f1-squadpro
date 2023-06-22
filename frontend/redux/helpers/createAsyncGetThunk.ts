@@ -2,13 +2,14 @@ import { AsyncThunk, createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 import { httpClient } from '@/clients/httpClient'
 
+interface MetaArgs<T> {
+  params?: { [param: string]: string }
+  onReject?: () => void
+}
+
 export default function createAsyncGetThunk<T>(
   url: string,
-): AsyncThunk<
-  T | undefined,
-  { params?: { [param: string]: string }; onReject?: () => void } | undefined,
-  {}
-> {
+): AsyncThunk<T | undefined, MetaArgs<T> | undefined, {}> {
   return createAsyncThunk(`${url}/get`, async (meta) => {
     try {
       let formattedParams = ''

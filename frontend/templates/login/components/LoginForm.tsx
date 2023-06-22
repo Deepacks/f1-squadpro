@@ -93,7 +93,7 @@ export const LoginForm: FC = memo(() => {
           className="mt-6"
           fullWidth
         >
-          Register
+          Login
         </Button>
         <p className="mt-4 text-center font-normal text-gray-700">
           You don't have an account?{' '}

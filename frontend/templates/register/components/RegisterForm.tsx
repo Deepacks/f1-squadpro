@@ -77,7 +77,7 @@ export const RegisterForm: FC = memo(() => {
             size="lg"
             label="Last Name"
             autoComplete="family-name"
-            value={firstName}
+            value={lastName}
             onChange={({ target: { value } }) => setLastName(value)}
           />
 

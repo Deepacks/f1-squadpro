@@ -1,6 +1,6 @@
 @layer base {
   body {
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     position: relative;
     background-color: var(--background-color);
@@ -9,7 +9,7 @@
   }
 
   main {
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     padding-top: 66px;
     overflow-x: hidden;

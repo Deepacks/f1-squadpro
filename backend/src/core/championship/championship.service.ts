@@ -19,15 +19,22 @@ export class ChampionshipService {
     private readonly userService: UserService,
   ) {}
 
-  async find(userId: string): Promise<ChampionshipDocument | null> {
+  async findByUserId(userId: string): Promise<ChampionshipDocument | null> {
     const { championship } = await this.userService.findById(userId)
     if (!championship) return null
 
     return this.championshipModel.findById(
       championship,
-      {},
+      { _id: false, code: false },
       { populate: ['teams.team', 'drivers.driver'] },
     )
+  }
+
+  async findByCode(code: string): Promise<ChampionshipDocument | null> {
+    const championship = await this.championshipModel.findOne({ code })
+    if (!championship) return null
+
+    return championship
   }
 
   async create({

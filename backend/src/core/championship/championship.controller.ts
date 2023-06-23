@@ -13,7 +13,7 @@ export class ChampionshipController {
   @Get()
   @UseGuards(JwtAuthGuard)
   async find(@User() userId: string) {
-    return this.championshipService.find(userId)
+    return this.championshipService.findByUserId(userId)
   }
 
   @Post()

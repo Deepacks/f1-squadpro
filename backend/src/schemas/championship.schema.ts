@@ -11,6 +11,9 @@ export class Championship {
   @Prop({ required: true })
   name: string
 
+  @Prop({ required: true })
+  code: string
+
   @Prop({
     type: [
       {

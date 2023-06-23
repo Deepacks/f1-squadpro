@@ -89,7 +89,9 @@ export const RegisterForm: FC = memo(() => {
               label="Email"
               autoComplete="email"
               value={email}
-              onChange={({ target: { value } }) => setEmail(value)}
+              onChange={({ target: { value } }) =>
+                setEmail(value.toLowerCase())
+              }
             />
             {isAlreadyExisting && (
               <p className="mt-1 text-[color:var(--accent-color)]">

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
 
 import { ChampionshipService } from './championship.service'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
@@ -10,10 +10,16 @@ import { User } from 'src/decorators/user.decorator'
 export class ChampionshipController {
   constructor(private readonly championshipService: ChampionshipService) {}
 
-  @Get()
+  @Get('active')
   @UseGuards(JwtAuthGuard)
-  async find(@User() userId: string) {
+  async findActive(@User() userId: string) {
     return this.championshipService.findByUserId(userId)
+  }
+
+  @Get('code/:code')
+  @UseGuards(JwtAuthGuard)
+  async findByCode(@Param('code') code: string) {
+    return this.championshipService.findByCode(code)
   }
 
   @Post()

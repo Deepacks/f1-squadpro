@@ -31,7 +31,10 @@ export class ChampionshipService {
   }
 
   async findByCode(code: string): Promise<ChampionshipDocument | null> {
-    const championship = await this.championshipModel.findOne({ code })
+    const championship = await this.championshipModel.findOne(
+      { code },
+      { __v: false },
+    )
     if (!championship) return null
 
     return championship
@@ -55,6 +58,7 @@ export class ChampionshipService {
       name,
       teams: positionedTeams,
       drivers: positionedDrivers,
+      code: 'pippococa',
     })
 
     await this.userService.saveChampionship(userId, championship._id)

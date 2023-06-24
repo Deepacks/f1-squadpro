@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model, ObjectId } from 'mongoose'
 
-import { User } from 'src/schemas/user.schema'
+import { User, UserDocument } from 'src/schemas/user.schema'
 import { UserSessionDto } from './dto/userSession-dto.type'
 
 @Injectable()
@@ -29,10 +29,10 @@ export class UserService {
 
   async getUserData(id: string): Promise<UserSessionDto> {
     const userData = await this.userModel.findById(id, {
-      _id: false,
-      hash: false,
-      isF1Driver: false,
-      __v: false,
+      email: true,
+      firstName: true,
+      lastName: true,
+      championship: true,
     })
 
     const { email, firstName, lastName, championship } = userData
@@ -43,6 +43,19 @@ export class UserService {
       lastName,
       hasChampionship: !!championship,
     }
+  }
+
+  async getF1Drivers(): Promise<UserDocument[]> {
+    return this.userModel.find(
+      { isF1Driver: true },
+      {
+        _id: true,
+        firstName: true,
+        lastName: true,
+        defaultTeam: true,
+        isMainDriver: true,
+      },
+    )
   }
 
   async saveChampionship(

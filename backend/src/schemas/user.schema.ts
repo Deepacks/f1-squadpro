@@ -19,11 +19,17 @@ export class User {
   @Prop({ required: true })
   lastName: string
 
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'Championship', default: null })
+  championship: Championship | null
+
   @Prop({ default: false })
   isF1Driver: boolean
 
-  @Prop({ type: SchemaTypes.ObjectId, ref: 'Championship', default: null })
-  championship: Championship | null
+  @Prop({ default: null })
+  defaultTeam: string | null
+
+  @Prop({ default: null })
+  isMainDriver: boolean | null
 }
 
 export type UserDocument = User & Document

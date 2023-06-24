@@ -7,6 +7,10 @@ module.exports = withMT({
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './templates/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {},
+  theme: {
+    screens: {
+      sm: '400px',
+    },
+  },
   plugins: [],
 })

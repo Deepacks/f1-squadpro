@@ -3,6 +3,7 @@
 export {
   Button,
   Card,
+  Chip,
   Collapse,
   Dialog,
   DialogBody,

@@ -21,10 +21,14 @@ export const useAppShellStateInit: () => [boolean, () => void] = () => {
         onReject: () => router.replace('/login'),
       }),
     ).then((action) => {
-      if (!(action.payload as UserState).hasChampionship) {
-        setShowChampionshipDialog(true)
-      } else {
-        dispatch(fetchChampionship())
+      const user = action.payload as UserState
+
+      if (user) {
+        if (!user?.hasChampionship) {
+          setShowChampionshipDialog(true)
+        } else {
+          dispatch(fetchChampionship())
+        }
       }
     })
   }, [])

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { FC, FormEvent, memo, useCallback, useState } from 'react'
 import { AxiosError } from 'axios'
 import { toast } from 'react-hot-toast'
+import { InformationCircleIcon } from '@heroicons/react/24/outline'
 import { httpClient } from '@/clients/httpClient'
 
 import { Card, Input, Button } from '@material'
@@ -88,8 +89,11 @@ export const RegisterForm: FC = memo(() => {
               size="lg"
               label="Email"
               autoComplete="email"
+              type="email"
               value={email}
-              onChange={({ target: { value } }) => setEmail(value)}
+              onChange={({ target: { value } }) =>
+                setEmail(value.toLowerCase())
+              }
             />
             {isAlreadyExisting && (
               <p className="mt-1 text-[color:var(--accent-color)]">
@@ -98,15 +102,24 @@ export const RegisterForm: FC = memo(() => {
             )}
           </div>
 
-          <Input
-            required
-            type="password"
-            size="lg"
-            label="Password"
-            autoComplete="new-password"
-            value={password}
-            onChange={({ target: { value } }) => setPassword(value)}
-          />
+          <div>
+            <Input
+              required
+              type="password"
+              size="lg"
+              label="Password"
+              autoComplete="new-password"
+              value={password}
+              onChange={({ target: { value } }) => setPassword(value)}
+            />
+            <div className="mt-2 flex items-start gap-1 font-normal text-gray-500">
+              <div>
+                <InformationCircleIcon className="mt-[3px] w-4 h-4 " />
+              </div>
+              Use at least 8 characters, one uppercase, one lowercase and one
+              number.
+            </div>
+          </div>
         </div>
 
         <Button

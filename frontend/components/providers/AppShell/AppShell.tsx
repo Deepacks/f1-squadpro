@@ -3,7 +3,7 @@
 import { useAppShellStateInit } from '@/hooks/useAppShellStateInit'
 
 import { Navbar } from '@ui'
-import { ChampionshipDialog } from './ChampionshipDialog'
+import { ChampionshipDialog } from './ChampionshipDialog/ChampionshipDialog'
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [showChampionshipDialog, handleDialogClose] = useAppShellStateInit()

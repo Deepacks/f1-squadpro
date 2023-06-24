@@ -8,6 +8,7 @@ import {
 } from 'src/schemas/championship.schema'
 import { TeamService } from '../team/team.service'
 import { UserService } from '../user/user.service'
+import { ChampionshipBasicInfoDto } from './dto/championshipBasicInfo-dto.type'
 import { ChampionshipCreateDto } from './dto/championshipCreate-dto.type'
 
 @Injectable()
@@ -19,15 +20,31 @@ export class ChampionshipService {
     private readonly userService: UserService,
   ) {}
 
-  async find(userId: string): Promise<ChampionshipDocument | null> {
+  async findByUserId(userId: string): Promise<ChampionshipDocument | null> {
     const { championship } = await this.userService.findById(userId)
     if (!championship) return null
 
     return this.championshipModel.findById(
       championship,
-      {},
+      { _id: false, code: false },
       { populate: ['teams.team', 'drivers.driver'] },
     )
+  }
+
+  async findByCode(code: string): Promise<ChampionshipBasicInfoDto | null> {
+    const championship = await this.championshipModel.findOne(
+      { code },
+      { __v: false },
+      { populate: 'drivers.driver' },
+    )
+    if (!championship) return null
+
+    const partecipants = championship.drivers.reduce(
+      (prevValue, { driver }) => prevValue + (driver.isF1Driver ? 0 : 1),
+      0,
+    )
+
+    return { name: championship.name, partecipants }
   }
 
   async create({
@@ -48,6 +65,7 @@ export class ChampionshipService {
       name,
       teams: positionedTeams,
       drivers: positionedDrivers,
+      code: 'PIPPOCOCA',
     })
 
     await this.userService.saveChampionship(userId, championship._id)

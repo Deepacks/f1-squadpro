@@ -11,6 +11,9 @@ export class Championship {
   @Prop({ required: true })
   name: string
 
+  @Prop({ required: true })
+  code: string
+
   @Prop({
     type: [
       {
@@ -19,7 +22,7 @@ export class Championship {
       },
     ],
   })
-  teams: { _id: ObjectId; points: number; team: Team }
+  teams: { _id: ObjectId; points: number; team: Team }[]
 
   @Prop({
     type: [
@@ -29,7 +32,7 @@ export class Championship {
       },
     ],
   })
-  drivers: { _id: ObjectId; points: number; driver: User }
+  drivers: { _id: ObjectId; points: number; driver: User }[]
 }
 
 export type ChampionshipDocument = Championship & Document

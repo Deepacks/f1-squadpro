@@ -63,8 +63,9 @@ export const LoginForm: FC = memo(() => {
             size="lg"
             label="Email"
             autoComplete="email"
+            type="email"
             value={email}
-            onChange={({ target: { value } }) => setEmail(value)}
+            onChange={({ target: { value } }) => setEmail(value.toLowerCase())}
           />
 
           <div>

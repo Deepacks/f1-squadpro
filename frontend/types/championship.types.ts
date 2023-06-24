@@ -12,3 +12,8 @@ export interface Championship {
     driver: Driver
   }[]
 }
+
+export interface ChampionshipBasicInfo {
+  name: string
+  partecipants: number
+}

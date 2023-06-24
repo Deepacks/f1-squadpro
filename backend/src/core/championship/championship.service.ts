@@ -65,7 +65,7 @@ export class ChampionshipService {
       name,
       teams: positionedTeams,
       drivers: positionedDrivers,
-      code: 'pippococa',
+      code: 'PIPPOCOCA',
     })
 
     await this.userService.saveChampionship(userId, championship._id)

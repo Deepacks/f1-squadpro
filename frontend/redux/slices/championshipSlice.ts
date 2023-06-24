@@ -22,7 +22,7 @@ const championshipSlice = createSlice({
 })
 
 export const fetchChampionship = createAsyncGetThunk<Championship | null>(
-  '/championship',
+  '/championship/active',
 )
 
 export default championshipSlice.reducer

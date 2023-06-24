@@ -1,7 +1,9 @@
-import { FC, memo, useEffect, useState } from 'react'
+import { FC, memo, useState } from 'react'
 
 import { Dialog } from '@ui'
+import { Card } from '@material'
 import { ChampionshipRadioGroup } from './ChampionshipRadioGroup'
+import { ChampionshipJoinForm } from './ChampionshipJoinForm'
 
 interface ChampionshipDialogProps {
   isOpen: boolean
@@ -19,10 +21,6 @@ export const ChampionshipDialog: FC<ChampionshipDialogProps> = memo(
       CHAMPIONSHIP_MODE.JOIN,
     )
 
-    useEffect(() => {
-      console.log(championshipMode)
-    }, [championshipMode])
-
     return (
       <Dialog
         isOpen={isOpen}
@@ -33,9 +31,17 @@ export const ChampionshipDialog: FC<ChampionshipDialogProps> = memo(
           </h2>
         }
       >
-        <div className="mt-[-10px] w-full flex justify-center">
+        <div className="w-full flex justify-center">
           <ChampionshipRadioGroup onModeChange={setChampionshipMode} />
         </div>
+
+        <Card className="mt-4 p-4" shadow={false}>
+          {championshipMode === CHAMPIONSHIP_MODE.JOIN ? (
+            <ChampionshipJoinForm />
+          ) : (
+            <></>
+          )}
+        </Card>
       </Dialog>
     )
   },

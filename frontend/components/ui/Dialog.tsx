@@ -28,8 +28,9 @@ export const Dialog: FC<PropsWithChildren<DialogProps>> = memo(
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0.9, y: -100 },
         }}
+        size="sm"
       >
-        {header && <DialogHeader>{header}</DialogHeader>}
+        {header && <DialogHeader className="pb-0">{header}</DialogHeader>}
 
         <DialogBody>{children}</DialogBody>
 

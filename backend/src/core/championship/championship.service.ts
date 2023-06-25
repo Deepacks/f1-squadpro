@@ -8,7 +8,7 @@ import {
 } from 'src/schemas/championship.schema'
 import { TeamService } from '../team/team.service'
 import { UserService } from '../user/user.service'
-import { ChampionshipBasicInfoDto } from './dto/championshipBasicInfo-dto.type'
+import { ChampionshipWithBasicInfoDto } from './dto/championshipWithBasicInfo-dto.type'
 import { ChampionshipCreateDto } from './dto/championshipCreate-dto.type'
 
 @Injectable()
@@ -31,20 +31,22 @@ export class ChampionshipService {
     )
   }
 
-  async findByCode(code: string): Promise<ChampionshipBasicInfoDto | null> {
+  async findByCode(code: string): Promise<ChampionshipWithBasicInfoDto | null> {
     const championship = await this.championshipModel.findOne(
       { code },
       { __v: false },
-      { populate: 'drivers.driver' },
+      { populate: ['teams.team', 'drivers.driver'] },
     )
     if (!championship) return null
 
-    const partecipants = championship.drivers.reduce(
+    const { _id, name, teams, drivers } = championship
+
+    const partecipants = drivers.reduce(
       (prevValue, { driver }) => prevValue + (driver.isF1Driver ? 0 : 1),
       0,
     )
 
-    return { name: championship.name, partecipants }
+    return { _id, name, teams, drivers, partecipants }
   }
 
   async create({

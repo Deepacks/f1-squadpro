@@ -7,7 +7,8 @@ import { AxiosError } from 'axios'
 import { toast } from 'react-hot-toast'
 import { httpClient } from '@/clients/httpClient'
 
-import { Card, Input, Button } from '@material'
+import { Card, Input } from '@material'
+import { Button } from '@forms'
 
 export const LoginForm: FC = memo(() => {
   const router = useRouter()
@@ -87,13 +88,7 @@ export const LoginForm: FC = memo(() => {
           </div>
         </div>
 
-        <Button
-          disabled={isSubmitting}
-          type="submit"
-          color="red"
-          className="mt-6"
-          fullWidth
-        >
+        <Button disabled={isSubmitting} className="mt-6" fullWidth>
           Login
         </Button>
         <p className="mt-4 text-center font-normal text-gray-700">

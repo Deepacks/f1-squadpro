@@ -22,23 +22,6 @@
     }
   }
 
-  button {
-    border-color: var(--accent-color) !important;
-    --tw-shadow-color: color-mix(
-      in srgb,
-      var(--accent-color) 40%,
-      transparent
-    ) !important;
-
-    &.bg-red-500 {
-      background-color: var(--accent-color) !important;
-    }
-
-    &:focus {
-      box-shadow: none !important;
-    }
-  }
-
   input {
     font-size: 16px !important;
   }

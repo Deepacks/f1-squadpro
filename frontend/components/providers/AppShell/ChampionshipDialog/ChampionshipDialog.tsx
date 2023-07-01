@@ -1,9 +1,10 @@
 import { FC, memo, useState } from 'react'
 
-import { Dialog } from '@ui'
+import { Dialog, SwipeStep } from '@ui'
 import { Card } from '@material'
-import { ChampionshipRadioGroup } from './ChampionshipRadioGroup'
 import { ChampionshipJoinForm } from './ChampionshipJoinForm'
+import { ChampionshipDriverSelect } from './ChampionshipDriverSelect'
+// import { ChampionshipRadioGroup } from './ChampionshipRadioGroup'
 
 interface ChampionshipDialogProps {
   isOpen: boolean
@@ -21,27 +22,41 @@ export const ChampionshipDialog: FC<ChampionshipDialogProps> = memo(
       CHAMPIONSHIP_MODE.JOIN,
     )
 
+    const [selectedChampionshipId, setSelectedChampionshipId] = useState<
+      string | null
+    >(null)
+
     return (
       <Dialog
         isOpen={isOpen}
         onClose={onClose}
-        header={
-          <h2 className="w-full text-center">
-            Create or Join an F1 Championship
-          </h2>
-        }
+        header={<h2 className="w-full text-center">Join an F1 Championship</h2>}
       >
-        <div className="w-full flex justify-center">
+        {/* <div className="mb-4 w-full flex justify-center">
           <ChampionshipRadioGroup onModeChange={setChampionshipMode} />
-        </div>
+        </div> */}
 
-        <Card className="mt-4 p-4" shadow={false}>
-          {championshipMode === CHAMPIONSHIP_MODE.JOIN ? (
-            <ChampionshipJoinForm />
-          ) : (
-            <></>
-          )}
-        </Card>
+        <SwipeStep
+          isFirstStep={!selectedChampionshipId}
+          firstStep={
+            <Card className="p-4" shadow={false}>
+              {championshipMode === CHAMPIONSHIP_MODE.JOIN ? (
+                <ChampionshipJoinForm
+                  disableTab={!!selectedChampionshipId}
+                  onChampionshipSelect={setSelectedChampionshipId}
+                />
+              ) : (
+                <></>
+              )}
+            </Card>
+          }
+          secondStep={
+            <ChampionshipDriverSelect
+              championshipId={selectedChampionshipId}
+              disableTab={!!selectedChampionshipId}
+            />
+          }
+        />
       </Dialog>
     )
   },

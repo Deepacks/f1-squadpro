@@ -12,4 +12,19 @@
   .base-transition {
     transition: all 0.3s ease-in-out;
   }
+
+  .overflow-overlay {
+    overflow: overlay !important;
+
+    &::-webkit-scrollbar:vertical {
+      width: 3px !important;
+    }
+    &::-webkit-scrollbar:horizontal {
+      height: 3px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #d0d0d0 !important;
+    }
+  }
 }

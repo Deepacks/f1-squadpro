@@ -50,7 +50,7 @@ export const NavbarUserMenuDesktop: FC = memo(() => {
           color="white"
           aria-label="toggle user menu"
           variant="text"
-          className="flex items-center gap-2 text-base text-[color:var(--text-color)] font-medium normal-case"
+          className="flex items-center gap-2 text-base text-[color:var(--text-color)] font-medium normal-case material-button"
         >
           <p>SkilledSoda</p>
           <UserCircleIcon className="h-7 w-7" />

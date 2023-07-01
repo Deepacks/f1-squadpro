@@ -1,6 +1,6 @@
 'use client'
 
-import { useAppShellStateInit } from '@/hooks/useAppShellStateInit'
+import { useAppShellStateInit } from './hooks/useAppShellStateInit'
 
 import { Navbar } from '@ui'
 import { ChampionshipDialog } from './ChampionshipDialog/ChampionshipDialog'

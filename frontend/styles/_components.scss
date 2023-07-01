@@ -1,4 +1,47 @@
 .material-radio:checked {
   border-color: var(--accent-color) !important;
   color: var(--accent-color) !important;
+
+  &.text-blue-500 {
+    color: var(--accent-color) !important;
+  }
+}
+
+.material-button {
+  border-color: var(--accent-color) !important;
+  --tw-shadow-color: color-mix(
+    in srgb,
+    var(--accent-color) 40%,
+    transparent
+  ) !important;
+
+  &.bg-red-500 {
+    background-color: var(--accent-color) !important;
+  }
+
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+@mixin swipe($translateX) {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX($translateX);
+  opacity: 0;
+  transition: all 0.33s ease-in-out;
+}
+.swipe-first {
+  @include swipe(-101%);
+}
+.swipe-second {
+  @include swipe(101%);
+}
+.swipe-active {
+  position: relative;
+  transform: translateX(0%);
+  opacity: 1;
 }

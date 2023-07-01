@@ -13,7 +13,8 @@ export interface Championship {
   }[]
 }
 
-export interface ChampionshipBasicInfo {
+export interface ChampionshipWithBasicInfo {
+  _id: string
   name: string
   partecipants: number
 }

@@ -1,11 +1,11 @@
 import { FC, memo } from 'react'
-import { Team } from '@/types/teams.types'
 import Image from 'next/image'
+import { TeamLocal } from '@/types/teams.types'
 
 interface TeamInfoProps {
   position: number
   points: number
-  team: Team
+  team: TeamLocal
 }
 
 export const TeamInfo: FC<TeamInfoProps> = memo(

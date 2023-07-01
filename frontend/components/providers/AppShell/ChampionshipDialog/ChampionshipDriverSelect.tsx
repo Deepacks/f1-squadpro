@@ -48,7 +48,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
               const {
                 driver: { firstName, lastName },
               } = championshipData.drivers.find(
-                ({ driver: driverData }) => driverData._id === driver,
+                ({ driver: driverData }) => driverData?._id === driver,
               )!
 
               teamDrivers.push(`${firstName} ${lastName}`)

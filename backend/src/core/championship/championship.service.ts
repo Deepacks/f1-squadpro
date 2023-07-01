@@ -31,22 +31,30 @@ export class ChampionshipService {
     )
   }
 
+  async findById(championshipId: string): Promise<ChampionshipDocument | null> {
+    return this.championshipModel.findById(
+      championshipId,
+      {},
+      { populate: ['teams.team', 'drivers.driver'] },
+    )
+  }
+
   async findByCode(code: string): Promise<ChampionshipWithBasicInfoDto | null> {
     const championship = await this.championshipModel.findOne(
       { code },
-      { __v: false },
-      { populate: ['teams.team', 'drivers.driver'] },
+      { _id: true, name: true, drivers: true },
+      { populate: 'drivers.driver' },
     )
     if (!championship) return null
 
-    const { _id, name, teams, drivers } = championship
+    const { _id, name, drivers } = championship
 
     const partecipants = drivers.reduce(
       (prevValue, { driver }) => prevValue + (driver.isF1Driver ? 0 : 1),
       0,
     )
 
-    return { _id, name, teams, drivers, partecipants }
+    return { _id, name, partecipants }
   }
 
   async create({

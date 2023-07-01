@@ -19,6 +19,13 @@ export class ChampionshipController {
     return this.championshipService.findByUserId(userId)
   }
 
+  @Get('id/:id')
+  async findById(
+    @Param('id') id: string,
+  ): Promise<ChampionshipDocument | null> {
+    return this.championshipService.findById(id)
+  }
+
   @Get('code/:code')
   @UseGuards(JwtAuthGuard)
   async findByCode(

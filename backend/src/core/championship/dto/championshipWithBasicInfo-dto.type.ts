@@ -1,6 +1,7 @@
-import { Championship } from 'src/schemas/championship.schema'
+import { ObjectId } from 'mongoose'
 
-export interface ChampionshipWithBasicInfoDto
-  extends Omit<Championship, 'code'> {
+export interface ChampionshipWithBasicInfoDto {
+  _id: ObjectId
+  name: string
   partecipants: number
 }

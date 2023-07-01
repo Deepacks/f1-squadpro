@@ -50,7 +50,7 @@ export class ChampionshipService {
     const { _id, name, drivers } = championship
 
     const partecipants = drivers.reduce(
-      (prevValue, { driver }) => prevValue + (driver.isF1Driver ? 0 : 1),
+      (prevValue, { driver }) => prevValue + (driver?.isF1Driver ? 0 : 1),
       0,
     )
 

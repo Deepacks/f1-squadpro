@@ -29,12 +29,14 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
       fetchChampionshipData()
     }, [championshipId])
 
+    console.log(championshipData)
+
     const teamsDriversMap = useMemo(() => {
       if (!championshipData) return null
 
       const newMap: Map<string, string[]> = new Map()
       const f1Drivers = championshipData.drivers
-        .filter(({ driver }) => driver.isF1Driver)
+        .filter(({ driver }) => driver?.isF1Driver)
         .map(({ driver }) => driver._id)
 
       championshipData.teams.forEach(

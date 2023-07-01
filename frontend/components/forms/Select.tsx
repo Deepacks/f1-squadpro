@@ -26,7 +26,6 @@ export const Select: FC<SelectProps> = memo(
       (value?: string) => onChange(value ?? ''),
       [onChange],
     )
-    console.log(menuClassName)
 
     return !options.length ? (
       <MaterialSelect

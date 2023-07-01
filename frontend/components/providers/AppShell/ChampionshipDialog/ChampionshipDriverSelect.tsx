@@ -37,7 +37,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
       const newMap: Map<string, string[]> = new Map()
       const f1Drivers = championshipData.drivers
         .filter(({ driver }) => driver?.isF1Driver)
-        .map(({ driver }) => driver._id)
+        .map(({ driver }) => driver?._id)
 
       championshipData.teams.forEach(
         ({ team: { name, firstDriver, secondDriver } }) => {

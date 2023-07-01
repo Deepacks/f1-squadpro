@@ -8,7 +8,8 @@ import { toast } from 'react-hot-toast'
 import { InformationCircleIcon } from '@heroicons/react/24/outline'
 import { httpClient } from '@/clients/httpClient'
 
-import { Card, Input, Button } from '@material'
+import { Card, Input } from '@material'
+import { Button } from '@forms'
 
 export const RegisterForm: FC = memo(() => {
   const router = useRouter()
@@ -122,13 +123,7 @@ export const RegisterForm: FC = memo(() => {
           </div>
         </div>
 
-        <Button
-          disabled={isSubmitting}
-          type="submit"
-          color="red"
-          className="mt-6"
-          fullWidth
-        >
+        <Button disabled={isSubmitting} className="mt-6" fullWidth>
           Register
         </Button>
         <p className="mt-4 text-center font-normal text-gray-700">

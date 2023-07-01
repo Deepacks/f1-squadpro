@@ -5,9 +5,12 @@ import {
 } from '@material'
 
 interface ButtonProps {
-  variant: MaterialButtonProps['variant']
+  tabIndex?: MaterialButtonProps['tabIndex']
+  disabled?: MaterialButtonProps['disabled']
+  variant?: MaterialButtonProps['variant']
   size?: MaterialButtonProps['size']
   className?: MaterialButtonProps['className']
+  fullWidth?: MaterialButtonProps['fullWidth']
   children: React.ReactNode
 }
 
@@ -16,9 +19,9 @@ export const Button: FC<ButtonProps> = memo((props) => {
 
   return (
     <MaterialButton
-      className={`${
-        className ?? ''
-      } normal-case text-sm text-[color:var(--text-color)]`}
+      color="red"
+      type="submit"
+      className={`material-button ${className ?? ''}`}
       {...buttonProps}
     />
   )

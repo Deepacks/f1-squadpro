@@ -1,11 +1,11 @@
 import { FC, memo, useMemo } from 'react'
 import { F1Teams } from '@/data/teams.data'
-import { Driver } from '@/types/drivers.types'
+import { DriverLocal } from '@/types/drivers.types'
 
 interface DriverInfoProps {
   position: number
   points: number
-  driver: Driver
+  driver: DriverLocal
 }
 
 export const DriverInfo: FC<DriverInfoProps> = memo(

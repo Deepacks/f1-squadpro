@@ -1,6 +1,6 @@
-import { Team } from '@/types/teams.types'
+import { TeamLocal } from '@/types/teams.types'
 
-export const F1Teams: Team[] = [
+export const F1Teams: TeamLocal[] = [
   { id: 'f1t-1', name: 'Alfa Romeo', color: '#C92D4B' },
   { id: 'f1t-2', name: 'AlphaTauri', color: '#5E8FAA' },
   { id: 'f1t-3', name: 'Alpine', color: '#2293D1' },

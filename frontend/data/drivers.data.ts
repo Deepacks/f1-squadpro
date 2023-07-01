@@ -1,6 +1,6 @@
-import { Driver } from '@/types/drivers.types'
+import { DriverLocal } from '@/types/drivers.types'
 
-export const F1Drivers: Driver[] = [
+export const F1Drivers: DriverLocal[] = [
   { id: 'f1d-', firstName: 'Alexander', lastName: 'Albon', team: 'f1t-10' },
   { id: 'f1d-', firstName: 'Carlos', lastName: 'Sainz', team: 'f1t-5' },
   { id: 'f1d-', firstName: 'Charles', lastName: 'Leclerc', team: 'f1t-5' },

@@ -20,7 +20,7 @@ export const Dialog: FC<PropsWithChildren<DialogProps>> = memo(
   ({ isOpen, onClose, header, footer, children }) => {
     return (
       <MaterialDialog
-        className="focus-visible:outline-none bg-[color:var(--background-color)]"
+        className="!w-[calc(100vw-40px)] !max-w-[500px] !min-w-0 focus-visible:outline-none bg-[color:var(--background-color)]"
         open={isOpen}
         handler={onClose}
         dismiss={{ enabled: false }}

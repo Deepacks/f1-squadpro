@@ -29,8 +29,6 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
       fetchChampionshipData()
     }, [championshipId])
 
-    console.log(championshipData)
-
     const teamsDriversMap = useMemo(() => {
       if (!championshipData) return null
 
@@ -66,6 +64,11 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
     const [selectedTeam, setSelectedTeam] = useState('')
     const [selectedDriver, setSelectedDriver] = useState('')
 
+    const handleTeamSelect = useCallback((selectedTeam: string) => {
+      setSelectedTeam(selectedTeam)
+      setSelectedDriver('')
+    }, [])
+
     const teamOptions = useMemo(
       () => (teamsDriversMap ? Array.from(teamsDriversMap.keys()) : []),
       [teamsDriversMap],
@@ -78,6 +81,11 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
       [championshipData, teamsDriversMap, selectedTeam],
     )
 
+    const isSubmitDisabled = useMemo(
+      () => !selectedTeam || !selectedDriver,
+      [selectedTeam, selectedDriver],
+    )
+
     return (
       <Card
         className="p-4 h-[172px] flex flex-col justify-between"
@@ -88,7 +96,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
           label="Select Team"
           options={teamOptions}
           value={selectedTeam}
-          onChange={setSelectedTeam}
+          onChange={handleTeamSelect}
           menuClassName="p-0 max-h-[92px] text-[color:var(--text-color)]"
         />
 
@@ -103,12 +111,15 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
                 label={driver}
                 color="red"
                 className="hover:before:opacity-0 material-radio"
+                checked={selectedDriver === driver}
+                onClick={() => setSelectedDriver(driver)}
               />
             ))}
         </div>
 
         <Button
           tabIndex={disableTab ? -1 : undefined}
+          disabled={isSubmitDisabled}
           className="py-1.5 text-md"
         >
           Partecipa

@@ -52,6 +52,7 @@ export const ChampionshipDialog: FC<ChampionshipDialogProps> = memo(
           }
           secondStep={
             <ChampionshipDriverSelect
+              onDialogClose={onClose}
               championshipId={selectedChampionshipId}
               disableTab={!!selectedChampionshipId}
             />

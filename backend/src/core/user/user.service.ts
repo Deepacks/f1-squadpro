@@ -4,6 +4,7 @@ import { Model, ObjectId } from 'mongoose'
 
 import { User, UserDocument } from 'src/schemas/user.schema'
 import { UserSessionDto } from './dto/userSession-dto.type'
+import { raiseBadRequest } from 'src/helpers/raiseBadRequest'
 
 @Injectable()
 export class UserService {
@@ -60,8 +61,10 @@ export class UserService {
 
   async saveChampionship(
     userId: string,
-    championshipId: ObjectId,
+    championshipId: string | ObjectId,
   ): Promise<void> {
+    if (!championshipId) raiseBadRequest('Bad championship Id')
+
     return this.userModel.findByIdAndUpdate(userId, {
       $set: { championship: championshipId },
     })

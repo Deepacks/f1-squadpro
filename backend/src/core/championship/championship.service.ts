@@ -2,14 +2,19 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 
+import { raiseBadRequest } from 'src/helpers/raiseBadRequest'
 import {
   Championship,
   ChampionshipDocument,
 } from 'src/schemas/championship.schema'
 import { TeamService } from '../team/team.service'
 import { UserService } from '../user/user.service'
-import { ChampionshipBasicInfoDto } from './dto/championshipBasicInfo-dto.type'
-import { ChampionshipCreateDto } from './dto/championshipCreate-dto.type'
+import { User } from 'src/schemas/user.schema'
+import {
+  ChampionshipBasicInfoDto,
+  ChampionshipCreateDto,
+  ChampionshipJoinDto,
+} from './dto'
 
 @Injectable()
 export class ChampionshipService {
@@ -59,6 +64,12 @@ export class ChampionshipService {
   }: {
     userId: string
   } & ChampionshipCreateDto): Promise<ChampionshipDocument> {
+    const user = await this.userService.findById(userId)
+
+    if (user.championship) {
+      raiseBadRequest('User already subscribed to a championship')
+    }
+
     const newTeams = await this.teamService.createMany(teams)
     const teamsIds = newTeams.map((team) => team._id as string)
 
@@ -76,6 +87,44 @@ export class ChampionshipService {
     await this.userService.saveChampionship(userId, championship._id)
 
     return championship
+  }
+
+  async join(
+    userId: string,
+    championshipJoinDto: ChampionshipJoinDto,
+  ): Promise<void> {
+    const user = await this.userService.findById(userId)
+    if (user.championship) {
+      raiseBadRequest('User already subscribed to a championship')
+    }
+
+    const { championshipId, teamId, driverId } = championshipJoinDto
+    if (!championshipId) raiseBadRequest('Bad championship Id')
+    if (!teamId) raiseBadRequest('Bad team Id')
+
+    const championship = await this.championshipModel.findById(championshipId)
+    if (!championship) {
+      raiseBadRequest('Championship not found')
+    }
+
+    const driverToUpdateIndex = championship.drivers.findIndex(
+      ({ driver }) => driver.toString() === driverId,
+    )
+    if (driverToUpdateIndex === -1) {
+      raiseBadRequest('Driver not found')
+    }
+
+    const newDriversList = [...championship.drivers]
+    newDriversList[driverToUpdateIndex].driver = userId as unknown as User
+
+    await this.teamService.replaceDriver({ userId, teamId, driverId })
+    await championship.updateOne({
+      $inc: { partecipants: 1 },
+      $set: { drivers: newDriversList },
+    })
+    await this.userService.saveChampionship(userId, championshipId)
+
+    return
   }
 
   private _buildPointsList(

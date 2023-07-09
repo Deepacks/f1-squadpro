@@ -74,7 +74,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
       () =>
         teamsDriversMap
           ? Array.from(teamsDriversMap.keys()).map(
-              (teamId) => F1Teams.find(({ id }) => id === teamId)!.name,
+              (teamId) => F1Teams.find(({ id }) => id === teamId)?.name ?? '',
             )
           : [],
       [teamsDriversMap],

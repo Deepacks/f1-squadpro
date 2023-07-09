@@ -8,7 +8,7 @@ import {
 } from 'src/schemas/championship.schema'
 import { TeamService } from '../team/team.service'
 import { UserService } from '../user/user.service'
-import { ChampionshipWithBasicInfoDto } from './dto/championshipWithBasicInfo-dto.type'
+import { ChampionshipBasicInfoDto } from './dto/championshipBasicInfo-dto.type'
 import { ChampionshipCreateDto } from './dto/championshipCreate-dto.type'
 
 @Injectable()
@@ -39,20 +39,14 @@ export class ChampionshipService {
     )
   }
 
-  async findByCode(code: string): Promise<ChampionshipWithBasicInfoDto | null> {
+  async findByCode(code: string): Promise<ChampionshipBasicInfoDto | null> {
     const championship = await this.championshipModel.findOne(
       { code },
-      { _id: true, name: true, drivers: true },
-      { populate: 'drivers.driver' },
+      { _id: true, name: true, partecipants: true },
     )
     if (!championship) return null
 
-    const { _id, name, drivers } = championship
-
-    const partecipants = drivers.reduce(
-      (prevValue, { driver }) => prevValue + (driver?.isF1Driver ? 0 : 1),
-      0,
-    )
+    const { _id, name, partecipants } = championship
 
     return { _id, name, partecipants }
   }
@@ -73,9 +67,10 @@ export class ChampionshipService {
 
     const championship = await this.championshipModel.create({
       name,
+      code: 'PIPPOCOCA',
+      partecipants: 1,
       teams: positionedTeams,
       drivers: positionedDrivers,
-      code: 'PIPPOCOCA',
     })
 
     await this.userService.saveChampionship(userId, championship._id)
@@ -89,7 +84,7 @@ export class ChampionshipService {
   ): Array<{ points: number } & Record<string, string>> {
     return arr.map(
       (item) =>
-        ({ points: 0, [key]: item } as { points: 0 } & Record<string, string>),
+        ({ points: 0, [key]: item }) as { points: 0 } & Record<string, string>,
     )
   }
 }

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
 
 import { ChampionshipService } from './championship.service'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
-import { ChampionshipWithBasicInfoDto } from './dto/championshipWithBasicInfo-dto.type'
+import { ChampionshipBasicInfoDto } from './dto/championshipBasicInfo-dto.type'
 import { ChampionshipCreateDto } from './dto/championshipCreate-dto.type'
 import { ChampionshipDocument } from 'src/schemas/championship.schema'
 import { User } from 'src/decorators/user.decorator'
@@ -30,7 +30,7 @@ export class ChampionshipController {
   @UseGuards(JwtAuthGuard)
   async findByCode(
     @Param('code') code: string,
-  ): Promise<ChampionshipWithBasicInfoDto | null> {
+  ): Promise<ChampionshipBasicInfoDto | null> {
     return this.championshipService.findByCode(code)
   }
 

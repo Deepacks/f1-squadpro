@@ -1,6 +1,6 @@
 export interface Team {
   _id: string
-  name: string
+  teamId: string
   firstDriver: string
   secondDriver: string
 }

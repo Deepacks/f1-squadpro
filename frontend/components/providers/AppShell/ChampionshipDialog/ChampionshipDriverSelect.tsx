@@ -3,6 +3,7 @@
 import { FC, memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { Championship } from '@/types/championship.types'
 import { httpClient } from '@/clients/httpClient'
+import { F1Teams } from '@/data/teams.data'
 
 import { Card, Radio } from '@material'
 import { Button, Select } from '@forms'
@@ -38,7 +39,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
         .map(({ driver }) => driver?._id)
 
       championshipData.teams.forEach(
-        ({ team: { name, firstDriver, secondDriver } }) => {
+        ({ team: { teamId, firstDriver, secondDriver } }) => {
           const teamDrivers: string[] = []
 
           Array.from([firstDriver, secondDriver]).forEach((driver) => {
@@ -53,7 +54,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
             }
           })
 
-          newMap.set(name, teamDrivers)
+          newMap.set(teamId, teamDrivers)
         },
         [],
       )
@@ -65,12 +66,17 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
     const [selectedDriver, setSelectedDriver] = useState('')
 
     const handleTeamSelect = useCallback((selectedTeam: string) => {
-      setSelectedTeam(selectedTeam)
+      setSelectedTeam(F1Teams.find(({ name }) => selectedTeam === name)!.id)
       setSelectedDriver('')
     }, [])
 
     const teamOptions = useMemo(
-      () => (teamsDriversMap ? Array.from(teamsDriversMap.keys()) : []),
+      () =>
+        teamsDriversMap
+          ? Array.from(teamsDriversMap.keys()).map(
+              (teamId) => F1Teams.find(({ id }) => id === teamId)!.name,
+            )
+          : [],
       [teamsDriversMap],
     )
     const driverOptions = useMemo(
@@ -95,7 +101,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
           tabIndex={disableTab ? -1 : undefined}
           label="Select Team"
           options={teamOptions}
-          value={selectedTeam}
+          value={F1Teams.find(({ id }) => id === selectedTeam)?.name ?? ''}
           onChange={handleTeamSelect}
           menuClassName="p-0 max-h-[92px] text-[color:var(--text-color)]"
         />

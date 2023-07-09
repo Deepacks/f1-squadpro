@@ -1,5 +1,5 @@
 export interface TeamCreateDto {
-  name: string
+  teamId: string
   firstDriver: string
   secondDriver: string
 }

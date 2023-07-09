@@ -8,7 +8,7 @@ export class Team {
   _id: ObjectId
 
   @Prop({ required: true })
-  name: string
+  teamId: string
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
   firstDriver: User

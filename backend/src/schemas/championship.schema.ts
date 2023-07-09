@@ -13,6 +13,9 @@ export class Championship {
 
   @Prop({ required: true })
   code: string
+  
+  @Prop({ required: true })
+  partecipants: number
 
   @Prop({
     type: [

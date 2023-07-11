@@ -74,7 +74,7 @@ export class ChampionshipService {
     const teamsIds = newTeams.map((team) => team._id as string)
 
     const positionedTeams = this._buildPointsList(teamsIds, 'team')
-    const positionedDrivers = this._buildPointsList(drivers, 'driver')
+    const positionedDrivers = this._buildPointsList(drivers)
 
     const championship = await this.championshipModel.create({
       name,
@@ -128,12 +128,15 @@ export class ChampionshipService {
   }
 
   private _buildPointsList(
-    arr: string[],
-    key: string,
+    arr: (string | Object)[],
+    key?: string,
   ): Array<{ points: number } & Record<string, string>> {
     return arr.map(
       (item) =>
-        ({ points: 0, [key]: item }) as { points: 0 } & Record<string, string>,
+        ({
+          points: 0,
+          ...(key ? { [key]: item } : { ...(item as Object) }),
+        }) as { points: 0 } & Record<string, string>,
     )
   }
 }

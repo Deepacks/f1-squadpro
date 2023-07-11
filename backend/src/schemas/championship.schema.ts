@@ -13,29 +13,35 @@ export class Championship {
 
   @Prop({ required: true })
   code: string
-  
+
   @Prop({ required: true })
   partecipants: number
 
   @Prop({
     type: [
       {
-        points: { type: Number },
-        team: { type: SchemaTypes.ObjectId, ref: 'Team' },
+        points: { type: Number, required: true },
+        team: { type: SchemaTypes.ObjectId, ref: 'Team', required: true },
       },
     ],
   })
-  teams: { _id: ObjectId; points: number; team: Team }[]
+  teams: { _id: ObjectId; points: number; team: Team; required: true }[]
 
   @Prop({
     type: [
       {
-        points: { type: Number },
-        driver: { type: SchemaTypes.ObjectId, ref: 'User' },
+        points: { type: Number, required: true },
+        teamLocalId: { type: String, required: true },
+        driver: { type: SchemaTypes.ObjectId, ref: 'User', required: true },
       },
     ],
   })
-  drivers: { _id: ObjectId; points: number; driver: User }[]
+  drivers: {
+    _id: ObjectId
+    teamLocalId: string
+    points: number
+    driver: User
+  }[]
 }
 
 export type ChampionshipDocument = Championship & Document

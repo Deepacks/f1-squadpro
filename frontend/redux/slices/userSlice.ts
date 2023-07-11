@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { RootState } from '../store'
 import createAsyncGetThunk from '../helpers/createAsyncGetThunk'
 
 export interface UserState {
@@ -33,5 +34,7 @@ const userSlice = createSlice({
 
 export const fetchSession = createAsyncGetThunk<UserState>('/user/me')
 export const { updateUser } = userSlice.actions
+
+export const getUser = (state: RootState) => state.user
 
 export default userSlice.reducer

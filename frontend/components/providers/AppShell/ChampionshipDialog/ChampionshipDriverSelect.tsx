@@ -87,28 +87,23 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
       [championshipData],
     )
 
-    // TODO: selectedTeamId should be of the document maybe???
-    const [selectedTeam, setSelectedTeam] = useState('')
+    const [selectedTeam, setSelectedTeam] = useState({ localId: '', label: '' })
     const [selectedDriver, setSelectedDriver] = useState('')
 
-    const handleTeamSelect = useCallback((selectedTeam: string) => {
-      setSelectedTeam(F1Teams.find(({ name }) => selectedTeam === name)!.id)
+    const handleTeamSelect = useCallback((selectedTeamLabel: string) => {
+      const { id } = F1Teams.find(({ name }) => selectedTeamLabel === name)!
+      setSelectedTeam({ localId: id, label: selectedTeamLabel })
       setSelectedDriver('')
     }, [])
 
     const teamOptions = useMemo(
-      () =>
-        teamsDriversMap
-          ? Array.from(teamsDriversMap.keys()).map(
-              (teamId) => F1Teams.find(({ id }) => id === teamId)?.name ?? '',
-            )
-          : [],
+      () => (teamsDriversMap ? F1Teams.map((f1Team) => f1Team.name) : []),
       [teamsDriversMap],
     )
     const driverOptions = useMemo(
       () =>
-        championshipData && teamsDriversMap && selectedTeam
-          ? teamsDriversMap.get(selectedTeam)!
+        championshipData && teamsDriversMap && selectedTeam.localId
+          ? teamsDriversMap.get(selectedTeam.localId)!
           : [],
       [championshipData, teamsDriversMap, selectedTeam],
     )
@@ -123,7 +118,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
         e.preventDefault()
 
         const teamId = championshipData!.teams.find(
-          ({ team }) => team.teamId === selectedTeam,
+          ({ team }) => team.teamId === selectedTeam.localId,
         )!.team._id
 
         const dto: ChampionshipJoinDto = {
@@ -152,7 +147,7 @@ export const ChampionshipDriverSelect: FC<ChampionshipDriverSelectProps> = memo(
             tabIndex={disableTab ? -1 : undefined}
             label="Select Team"
             options={teamOptions}
-            value={F1Teams.find(({ id }) => id === selectedTeam)?.name ?? ''}
+            value={selectedTeam.label}
             onChange={handleTeamSelect}
             menuClassName="p-0 max-h-[92px] text-[color:var(--text-color)]"
           />

@@ -4,6 +4,8 @@ import {
   ArrowRightOnRectangleIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline'
+import { useAppSelector } from '@/redux/hooks'
+import { getUser } from '@/redux/slices/userSlice'
 
 import { Button } from '@material'
 import { Menu, MenuItem } from '../Menu'
@@ -14,6 +16,8 @@ enum UserMenuItems {
 
 export const NavbarUserMenuDesktop: FC = memo(() => {
   const router = useRouter()
+
+  const { firstName, lastName } = useAppSelector(getUser)
 
   const userMenuItems: MenuItem[] = useMemo(
     () => [
@@ -52,7 +56,9 @@ export const NavbarUserMenuDesktop: FC = memo(() => {
           variant="text"
           className="flex items-center gap-2 text-base text-[color:var(--text-color)] font-medium normal-case material-button"
         >
-          <p>SkilledSoda</p>
+          <p>
+            {firstName} {lastName}
+          </p>
           <UserCircleIcon className="h-7 w-7" />
         </Button>
       </Menu>

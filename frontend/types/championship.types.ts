@@ -1,6 +1,13 @@
 import { Driver } from './drivers.types'
 import { Team } from './teams.types'
 
+export interface ChampionshipDriver {
+  _id: string
+  points: number
+  teamLocalId: string
+  driver: Driver
+}
+
 export interface Championship {
   _id: string
   name: string
@@ -8,10 +15,7 @@ export interface Championship {
     points: number
     team: Team
   }[]
-  drivers: {
-    points: number
-    driver: Driver
-  }[]
+  drivers: ChampionshipDriver[]
 }
 
 export interface ChampionshipWithBasicInfo {

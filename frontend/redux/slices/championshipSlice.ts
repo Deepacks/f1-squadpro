@@ -1,5 +1,6 @@
 import { Championship } from '@/types/championship.types'
 import { createSlice } from '@reduxjs/toolkit'
+import { RootState } from '../store'
 import createAsyncGetThunk from '../helpers/createAsyncGetThunk'
 
 interface ChampionshipState {
@@ -24,5 +25,8 @@ const championshipSlice = createSlice({
 export const fetchChampionship = createAsyncGetThunk<Championship | null>(
   '/championship/active',
 )
+
+export const getChamptionshipDrivers = (state: RootState) =>
+  state.championship.championship?.drivers
 
 export default championshipSlice.reducer

@@ -28,5 +28,7 @@ export const fetchChampionship = createAsyncGetThunk<Championship | null>(
 
 export const getChamptionshipDrivers = (state: RootState) =>
   state.championship.championship?.drivers
+export const getChamptionshipTeams = (state: RootState) =>
+  state.championship.championship?.teams
 
 export default championshipSlice.reducer

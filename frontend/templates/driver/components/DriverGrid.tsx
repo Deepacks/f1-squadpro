@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useCallback } from 'react'
+import { FC, memo, useCallback, useMemo } from 'react'
 import { useAppSelector } from '@/redux/hooks'
 import { getChamptionshipDrivers } from '@/redux/slices/championshipSlice'
 import { DriverLocal } from '@/types/drivers.types'
@@ -10,6 +10,18 @@ import { DriverInfo } from './DriverInfo'
 
 export const DriverGrid: FC = memo(() => {
   const championshipDrivers = useAppSelector(getChamptionshipDrivers)
+
+  const sortedDrivers = useMemo(
+    () =>
+      championshipDrivers
+        ? [...championshipDrivers].sort((a, b) => {
+            if (a.points > b.points) return -1
+            if (a.points < b.points) return +1
+            return 0
+          })
+        : [],
+    [championshipDrivers],
+  )
 
   const driver2Local = useCallback(
     (champDriver: ChampionshipDriver) =>
@@ -22,11 +34,11 @@ export const DriverGrid: FC = memo(() => {
     [],
   )
 
-  return championshipDrivers?.map((driver, index) => (
+  return sortedDrivers.map((driver, index) => (
     <DriverInfo
       key={index}
       position={index + 1}
-      points={110}
+      points={driver.points}
       driver={driver2Local(driver)}
     />
   ))

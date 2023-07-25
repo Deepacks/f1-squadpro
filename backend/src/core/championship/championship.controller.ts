@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
 
 import { ChampionshipService } from './championship.service'
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
+import { JwtAuthGuard, RoleGuard } from 'src/auth/guards'
 import { ChampionshipDocument } from 'src/schemas/championship.schema'
 import { User } from 'src/decorators/user.decorator'
 import {
@@ -38,7 +38,7 @@ export class ChampionshipController {
   }
 
   @Post('create')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   async create(
     @User() userId: string,
     @Body() championshipCreateDto: ChampionshipCreateDto,

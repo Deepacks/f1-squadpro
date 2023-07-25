@@ -13,7 +13,7 @@ import { AuthService } from './auth.service'
 import { isDev } from 'src/helpers/isDev.helper'
 import { CookieOptions, Request, Response } from 'express'
 import { AuthDto, AuthRegisterDto } from './dto/auth-dto.type'
-import { JwtAuthGuard } from './jwt-auth.guard'
+import { JwtAuthGuard } from './guards'
 
 const COOKIE_OPTIONS: CookieOptions = {
   maxAge: 1000 * 60 * 60 * 24 * 7,

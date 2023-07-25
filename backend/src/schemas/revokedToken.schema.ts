@@ -5,13 +5,13 @@ import { Document, Types } from 'mongoose'
 export class RevokedToken {
   _id: Types.ObjectId
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   userId: string
 
-  @Prop({ required: true })
+  @Prop({ type: Number, required: true })
   iat: number
 
-  @Prop({ required: true })
+  @Prop({ type: Number, required: true })
   exp: number
 }
 

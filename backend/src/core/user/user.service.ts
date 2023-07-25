@@ -34,15 +34,17 @@ export class UserService {
       firstName: true,
       lastName: true,
       championship: true,
+      role: true,
     })
 
-    const { email, firstName, lastName, championship } = userData
+    const { email, firstName, lastName, championship, role } = userData
 
     return {
       email,
       firstName,
       lastName,
       hasChampionship: !!championship,
+      role,
     }
   }
 

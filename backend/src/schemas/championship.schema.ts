@@ -8,13 +8,13 @@ import { User } from './user.schema'
 export class Championship {
   _id: ObjectId
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   name: string
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   code: string
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   partecipants: number
 
   @Prop({

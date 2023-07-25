@@ -7,7 +7,7 @@ import { User } from './user.schema'
 export class Team {
   _id: ObjectId
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   teamId: string
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })

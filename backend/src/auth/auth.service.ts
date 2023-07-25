@@ -33,7 +33,7 @@ export class AuthService {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED)
     }
 
-    return { userId }
+    return { userId, role: user.role }
   }
 
   async register(authDto: AuthRegisterDto): Promise<string> {

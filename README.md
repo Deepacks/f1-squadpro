@@ -1,6 +1,6 @@
 # F1 SquadPro
 
-A web app to manage a seasonal championship with your friends on EA's F1 games.
+This is made with the sole purpose of fixing a missing game funcionality. EA be damned.
 
 ## Run Locally
 
